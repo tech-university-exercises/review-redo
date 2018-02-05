@@ -1,7 +1,5 @@
 const Server = require('../server');
 
-// const output = require('./index.html');
-
 describe('Server test', () => {
   test('responds with success statusCode', (done) => {
     const options = {
