@@ -1,4 +1,4 @@
-const axios = require('axios');
+const rp = require('request-promise');
 
 module.exports = [
   {
@@ -7,11 +7,11 @@ module.exports = [
     handler: (request, reply) => {
       const url = 'https://5gj1qvkc5h.execute-api.us-east-1.amazonaws.com/dev/allBooks';
       let booklist;
-      axios.get(url)
+      rp.get(url)
         .then(response => response.data)
         .then((list) => {
           booklist = list.books;
-          return list.books.map(eachBook => axios.get(`https://5gj1qvkc5h.execute-api.us-east-1.amazonaws.com/dev/findBookById/${eachBook.id}`)
+          return list.books.map(eachBook => rp.get(`https://5gj1qvkc5h.execute-api.us-east-1.amazonaws.com/dev/findBookById/${eachBook.id}`)
             .then(response => response.data));
         })
         .then(list => Promise.all(list))
@@ -30,7 +30,6 @@ module.exports = [
           return result;
         }, {}))
         .then((result) => {
-          console.log(result);
           reply(result);
         })
         .catch((error) => {
