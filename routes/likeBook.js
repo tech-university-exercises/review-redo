@@ -3,7 +3,7 @@ const Models = require('../models');
 module.exports = [
   {
     method: 'GET',
-    path: '/book/like/{$bookid}',
+    path: '/book/like/{bookid}',
     handler: (request, reply) => {
       Models.booklist.update({
         liked: 'true',
