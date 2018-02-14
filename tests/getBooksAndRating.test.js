@@ -96,7 +96,7 @@ describe('Server test', () => {
       ],
     };
     Server.inject(options, (response) => {
-      expect(response.result).toBe(result);
+      expect(response.result).toEqual(result);
       done();
     });
   });

@@ -32,15 +32,10 @@ module.exports = [
           });
           return true;
         })
-        // .then(listWithRating => Models.booklist.upsert({
-        //   bookid: listWithRating.id,
-        //   author: listWithRating.Author,
-        //   name: listWithRating.Name,
-        //   rating: listWithRating.rating,
-        // }))
         .then((result) => {
-          if (result) { reply({ statusCode: '201', message: 'Details entered' }); } else {
-            reply({ statusCode: '201', message: 'No new entry made' });
+          console.log(result, '****');
+          if (result) { reply({ statusCode: '200', message: 'Inserted or no change' }); } else {
+            reply({ statusCode: '201', message: 'Roe updated' });
           }
         })
         .catch((error) => {
