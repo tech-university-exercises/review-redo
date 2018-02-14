@@ -12,11 +12,11 @@ module.exports = [
           bookid: request.params.bookid,
         },
       })
-        .then(() => {
-          reply({ message: 'Book liked.', statusCode: 200 });
+        .then((result) => {
+          if (result === 1) { reply({ message: 'Book liked.', statusCode: 200 }); } else { reply({ message: 'Bookid doesnot exit.', statusCode: 404 }); }
         })
         .catch(() => {
-          reply({ message: 'There was some error.', statusCode: 400 });
+          reply({ message: 'There was some error.', statusCode: 500 });
         });
     },
   }];
