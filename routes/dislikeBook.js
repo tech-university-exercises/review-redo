@@ -13,7 +13,7 @@ module.exports = [
         },
       })
         .then((result) => {
-          if (result === 1) { reply({ message: 'Book disliked.', statusCode: 200 }); } else { reply({ message: 'Bookid doesnot exit.', statusCode: 404 }); }
+          if (result[0] === 1) { reply({ message: 'Book disliked.', statusCode: 200 }); } else { reply({ message: 'Bookid doesnot exit.', statusCode: 404 }); }
         })
         .catch(() => {
           reply({ message: 'There was some error.', statusCode: 500 });

@@ -34,4 +34,14 @@ describe('Server for invalid bookid test', () => {
       done();
     });
   });
+  test('responds with message for upsert', (done) => {
+    const options = {
+      method: 'GET',
+      url: '/book/like/100',
+    };
+    Server.inject(options, (response) => {
+      expect(response.result.message).toBe('Bookid doesnot exit.');
+      done();
+    });
+  });
 });
