@@ -20,12 +20,24 @@ module.exports = [
           newEntry.rating = JSON.parse(rateList[index]).rating;
           return newEntry;
         }))
-        .then(listWithRating => Models.BookL.upsert({
-          bookid: listWithRating.id,
-          author: listWithRating.Author,
-          name: listWithRating.Name,
-          rating: listWithRating.rating,
-        }))
+        .then((listWithRating) => {
+          listWithRating.forEach((bookEntry) => {
+            Models.booklist.upsert({
+              id: bookEntry.id,
+              bookid: bookEntry.id,
+              author: bookEntry.Author,
+              name: bookEntry.Name,
+              rating: bookEntry.rating,
+            });
+          });
+          return true;
+        })
+        // .then(listWithRating => Models.booklist.upsert({
+        //   bookid: listWithRating.id,
+        //   author: listWithRating.Author,
+        //   name: listWithRating.Name,
+        //   rating: listWithRating.rating,
+        // }))
         .then((result) => {
           if (result) { reply({ statusCode: '201', message: 'Details entered' }); } else {
             reply({ statusCode: '201', message: 'No new entry made' });

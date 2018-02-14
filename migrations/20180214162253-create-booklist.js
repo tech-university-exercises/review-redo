@@ -1,3 +1,4 @@
+/*eslint-disable*/
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -18,6 +19,9 @@ module.exports = {
         type: Sequelize.STRING
       },
       name: {
+        type: Sequelize.STRING
+      },
+      liked: {
         type: Sequelize.STRING
       },
       createdAt: {
