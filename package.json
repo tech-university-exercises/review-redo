@@ -2,9 +2,10 @@
   "name": "template",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "jest",
+    "test": "NODE_ENV=test sequelize db:migrate:undo:all &&  NODE_ENV=test sequelize db:migrate && NODE_ENV=test sequelize db:seed:all &&  jest",
+    "start": "NODE_ENV=test sequelize db:migrate:undo:all &&  NODE_ENV=test sequelize db:migrate && nodemon server.js",
     "coverage": "jest --coverage --notify"
   },
   "author": "",
@@ -18,6 +19,7 @@
   "dependencies": {
     "axios": "^0.17.1",
     "hapi": "^16.6.2",
+    "pg": "^7.4.1",
     "request": "^2.83.0",
     "request-promise": "^4.2.2",
     "sequelize": "^4.32.2",

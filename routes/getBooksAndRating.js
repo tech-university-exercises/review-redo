@@ -8,20 +8,18 @@ module.exports = [
       const url = 'https://5gj1qvkc5h.execute-api.us-east-1.amazonaws.com/dev/allBooks';
       let booklist;
       rp.get(url)
-        .then(response => response.data)
-        .then((list) => {
+        .then((result) => {
+          const list = JSON.parse(result);
           booklist = list.books;
-          return list.books.map(eachBook => rp.get(`https://5gj1qvkc5h.execute-api.us-east-1.amazonaws.com/dev/findBookById/${eachBook.id}`)
-            .then(response => response.data));
+          return list.books.map(eachBook => rp.get(`https://5gj1qvkc5h.execute-api.us-east-1.amazonaws.com/dev/findBookById/${eachBook.id}`));
         })
         .then(list => Promise.all(list))
         .then(rateList => booklist.map((entry, index) => {
           const newEntry = entry;
-          newEntry.rating = rateList[index].rating;
+          newEntry.rating = JSON.parse(rateList[index]).rating;
           return newEntry;
         }))
         .then(listWithRating => listWithRating.reduce((result, item) => {
-          console.log(item.Author);
           if (!result[item.Author]) {
             result[item.Author] = new Array(item);
           } else {
